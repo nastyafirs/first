@@ -7,13 +7,36 @@ public class CheckPassword : MonoBehaviour
 {
 
     private string password = "qwe";
-    public InputField inputField;
+    private string login = "qwe";
+    public InputField inputpassword;
+    public InputField inputlogin;
+    public GameObject[] imageTargets;
+    public bool logged = false;
+    public Image canvasBackground;
+    public Text text;
 
     public void OnClickStart()
     {
-        if (password.Equals(inputField.text)){
-            Debug.Log("Password is ok");
+        if (password.Equals(inputpassword.text) && login.Equals(inputlogin.text))
+        {
+            foreach(GameObject imageTarget in imageTargets)
+            {
+                imageTarget.SetActive(!imageTarget.activeSelf);
+            }
+            logged = true;
+            canvasBackground.enabled = false;
+
+        }
+        else
+        {
+            ChangeText("Неверный логин или пароль!");
         }
 
     }
+
+    private void ChangeText(string text)
+    {
+        this.text.text = text;
+    }
+
 }
